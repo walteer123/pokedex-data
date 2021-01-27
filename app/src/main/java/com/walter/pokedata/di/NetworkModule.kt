@@ -1,17 +1,17 @@
 package com.walter.pokedata.di
 
+import com.walter.pokedata.PokemonService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.FragmentComponent
-import okhttp3.OkHttp
+import dagger.hilt.android.components.ActivityComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 @Module
-@InstallIn
+@InstallIn(ActivityComponent::class)
 object NetworkModule {
     @Provides
     @Singleton
@@ -24,4 +24,9 @@ object NetworkModule {
         .baseUrl("https://pokeapi.co/api/v2/")
         .addConverterFactory(MoshiConverterFactory.create())
         .build()
+
+    @Provides
+    @Singleton
+    fun providePokemonService(retrofit: Retrofit) = retrofit.create(PokemonService::class.java)
+
 }
