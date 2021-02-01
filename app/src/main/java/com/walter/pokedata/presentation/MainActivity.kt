@@ -1,7 +1,8 @@
-package com.walter.pokedata
+package com.walter.pokedata.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.walter.pokedata.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

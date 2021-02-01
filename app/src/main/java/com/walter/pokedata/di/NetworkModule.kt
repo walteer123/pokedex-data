@@ -1,6 +1,6 @@
 package com.walter.pokedata.di
 
-import com.walter.pokedata.PokemonService
+import com.walter.pokedata.data.repository.PokemonService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
