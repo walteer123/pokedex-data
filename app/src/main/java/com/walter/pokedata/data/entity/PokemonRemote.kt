@@ -5,7 +5,7 @@ import com.walter.pokedata.domain.Pokemon
 
 data class PokemonRemote(
         @field:Json(name = "name") val name: String,
-        @field:Json(name = "url") val details: String
+        @field:Json(name = "url") val url: String?
 ) {
     fun transform() = Pokemon(
             name = name,
@@ -13,7 +13,7 @@ data class PokemonRemote(
     )
 
     private fun getImageUrl(): String {
-        val index = details.split("/".toRegex()).dropLast(1).last()
+        val index = url?.split("/".toRegex())?.dropLast(1)?.last()
         return "https://pokeres.bastionbot.org/images/pokemon/$index.png"
     }
 }

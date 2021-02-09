@@ -25,9 +25,7 @@ class MainViewModel
 
     private fun fetchPokemons(){
         viewModelScope.launch {
-            val teste = pokemonRepository.fetchPokemonList()
-            val size = teste.size
-
+            pokemonRepository.fetchPokemonList(20,0)
         }
     }
 

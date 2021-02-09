@@ -1,5 +1,6 @@
 package com.walter.pokedata.di
 
+import com.squareup.moshi.Moshi
 import com.walter.pokedata.data.repository.PokemonService
 import dagger.Module
 import dagger.Provides
@@ -19,10 +20,10 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient) = Retrofit.Builder()
+    fun provideRetrofit(okHttpClient: OkHttpClient, moshi: Moshi) = Retrofit.Builder()
         .client(okHttpClient)
         .baseUrl("https://pokeapi.co/api/v2/")
-        .addConverterFactory(MoshiConverterFactory.create())
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
 
     @Provides
