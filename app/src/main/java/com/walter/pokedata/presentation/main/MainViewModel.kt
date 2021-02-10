@@ -1,11 +1,11 @@
-package com.walter.pokedata.presentation
+package com.walter.pokedata.presentation.main
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.walter.pokedata.domain.PokemonRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -13,19 +13,17 @@ import javax.inject.Inject
 class MainViewModel
 @Inject constructor(private val pokemonRepository: PokemonRepository): ViewModel() {
 
-    private val _state = MutableStateFlow(PokemonState.Opened)
-    val state : StateFlow<PokemonState> get() = _state
+    private val _state = MutableLiveData<PokemonState>()
+    val state : MutableLiveData<PokemonState> get() = _state
 
-    fun interact(interaction: PokemonInteraction) {
-        when(interaction) {
-            is PokemonInteraction.Fetch -> fetchPokemons()
-        }
+    init {
+        fetchPokemons()
     }
-
 
     private fun fetchPokemons(){
         viewModelScope.launch {
-            pokemonRepository.fetchPokemonList(20,0)
+           val items = pokemonRepository.fetchPokemonList(20,0)
+            _state.value = PokemonState.Data(items = items )
         }
     }
 
