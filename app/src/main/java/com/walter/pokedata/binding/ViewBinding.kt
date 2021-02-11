@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 
 object ViewBinding {
 
+    @JvmStatic
     @BindingAdapter("circleImageUrl")
     fun setCircleImageUrl(view: ImageView, url: String) {
         Glide
@@ -15,6 +16,5 @@ object ViewBinding {
             .circleCrop()
             .into(view)
     }
-
 
 }

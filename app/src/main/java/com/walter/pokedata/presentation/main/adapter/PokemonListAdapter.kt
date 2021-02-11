@@ -30,9 +30,7 @@ class PokemonListAdapter(): ListAdapter<Pokemon, CustomBindViewHolder<Pokemon>>(
     class PokemonViewHolder(private val binding: PokemonListItemLayoutBinding) : CustomBindViewHolder<Pokemon>(binding) {
         override fun bind(data: Pokemon?) {
             data?.let {
-                binding.apply {
-                    pokemon = it
-                }
+                binding.apply { pokemon = it }
             }
         }
 

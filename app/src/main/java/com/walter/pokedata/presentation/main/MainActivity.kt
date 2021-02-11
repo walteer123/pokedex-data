@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.walter.pokedata.databinding.ActivityMainBinding
+import com.walter.pokedata.presentation.main.adapter.PokemonListAdapter
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -17,11 +18,15 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
     val viewModel: MainViewModel by viewModels()
+    val pokemonAdapter by lazy { PokemonListAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 
+        binding.pokemonRecycler.apply {
+            adapter = pokemonAdapter
+        }
         observeState()
 
     }
@@ -30,7 +35,9 @@ class MainActivity : AppCompatActivity() {
         viewModel.state.observe(this) { state ->
             state?.let {
                 when (state) {
-                    is PokemonState.Data -> {}
+                    is PokemonState.Data -> {
+                        pokemonAdapter.submitList(state.items)
+                    }
                 }
             }
 
