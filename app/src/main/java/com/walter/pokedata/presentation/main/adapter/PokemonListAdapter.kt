@@ -7,6 +7,8 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import coil.transform.CircleCropTransformation
 import com.walter.pokedata.R
 import com.walter.pokedata.databinding.PokemonListItemLayoutBinding
 import com.walter.pokedata.domain.Pokemon
@@ -30,7 +32,11 @@ class PokemonListAdapter(): ListAdapter<Pokemon, CustomBindViewHolder<Pokemon>>(
     class PokemonViewHolder(private val binding: PokemonListItemLayoutBinding) : CustomBindViewHolder<Pokemon>(binding) {
         override fun bind(data: Pokemon?) {
             data?.let {
-                binding.apply { pokemon = it }
+                binding.pokemonItemImage.load(it.imageUrl){
+                    crossfade(true)
+                    transformations(CircleCropTransformation())
+                }
+                binding.pokemonItemName.text = it.name
             }
         }
 
