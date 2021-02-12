@@ -82,7 +82,12 @@ dependencies {
     def recycler_version = "1.1.0"
     implementation "androidx.recyclerview:recyclerview:$recycler_version"
 
-    //glide
+    //coil
     implementation "io.coil-kt:coil:1.1.1"
+
+    //paging
+    def paging_version = "3.0.0-beta01"
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+
 
 }

@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import com.walter.pokedata.databinding.ActivityMainBinding
 import com.walter.pokedata.presentation.main.adapter.PokemonListAdapter
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
@@ -24,23 +25,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 
+        setRecycler(binding)
+        observeListData()
+
+    }
+
+    private fun setRecycler(binding: ActivityMainBinding) {
         binding.pokemonRecycler.apply {
             adapter = pokemonAdapter
         }
-        observeState()
-
     }
 
-    private fun observeState() {
-        viewModel.state.observe(this) { state ->
-            state?.let {
-                when (state) {
-                    is PokemonState.Data -> {
-                        pokemonAdapter.submitList(state.items)
-                    }
-                }
+    private fun observeListData() {
+        lifecycleScope.launch {
+            viewModel.data.collectLatest {
+                pokemonAdapter.submitData(it)
             }
-
         }
     }
+
 }

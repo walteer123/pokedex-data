@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +15,7 @@ import com.walter.pokedata.databinding.PokemonListItemLayoutBinding
 import com.walter.pokedata.domain.Pokemon
 import com.walter.pokedata.util.CustomBindViewHolder
 
-class PokemonListAdapter(): ListAdapter<Pokemon, CustomBindViewHolder<Pokemon>>(diffUtil) {
+class PokemonListAdapter: PagingDataAdapter<Pokemon, CustomBindViewHolder<Pokemon>>(diffUtil) {
 
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<Pokemon>() {
@@ -47,7 +48,7 @@ class PokemonListAdapter(): ListAdapter<Pokemon, CustomBindViewHolder<Pokemon>>(
     }
 
     override fun onBindViewHolder(holder: CustomBindViewHolder<Pokemon>, position: Int) {
-        currentList?.getOrNull(position)?.let { holder.bind(getItem(position)) }
+        getItem(position)?.let { holder.bind(it) }
     }
 
 
