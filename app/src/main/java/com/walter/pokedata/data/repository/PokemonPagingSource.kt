@@ -4,6 +4,8 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.walter.pokedata.domain.Pokemon
 import com.walter.pokedata.domain.PokemonRepository
+import com.walter.pokedata.util.onError
+import com.walter.pokedata.util.onSuccess
 
 class PokemonPagingSource(
     private val repository: PokemonRepository
@@ -12,12 +14,22 @@ class PokemonPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Pokemon> {
         val offset = params.key ?: 0
         return try {
-            val data = repository.fetchPokemonList(params.loadSize, offset)
-            LoadResult.Page(
-                data = data,
-                prevKey = null,
-                nextKey = offset + params.loadSize + 1
-            )
+            lateinit var result: LoadResult<Int, Pokemon>
+            repository.fetchPokemonList(params.loadSize, offset)
+                .onSuccess { pokemonList ->
+                    result = LoadResult.Page(
+                        data = pokemonList,
+                        prevKey = null,
+                        nextKey = pokemonList.offsetOrNull(offset + params.loadSize)
+                    )
+
+                }
+                .onError {
+                    result = LoadResult.Error(
+                        throwable = Throwable(it)
+                    )
+                }
+             result
         } catch (e: Exception) {
             LoadResult.Error(Throwable(e))
         }
@@ -26,5 +38,11 @@ class PokemonPagingSource(
     override fun getRefreshKey(state: PagingState<Int, Pokemon>): Int? {
         TODO("Not yet implemented")
     }
+
+    private fun List<Pokemon>.offsetOrNull(offset:Int) : Int? =
+        if (this.isEmpty())
+            null
+        else
+            offset + 1
 
 }

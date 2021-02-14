@@ -1,19 +1,14 @@
 package com.walter.pokedata.data.repository
 
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import com.walter.pokedata.domain.Pokemon
 import com.walter.pokedata.domain.PokemonRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.withContext
+import com.walter.pokedata.network.SafeRequest
 import javax.inject.Inject
 
 class PokemonRepositoryImpl @Inject constructor(
-        private val pokemonService: PokemonService
+        private val pokemonService: PokemonService,
+        private val safeRequest: SafeRequest
 ): PokemonRepository {
-    override suspend fun fetchPokemonList(limit: Int, offset: Int) = withContext(Dispatchers.IO){
+    override suspend fun fetchPokemonList(limit: Int, offset: Int) = safeRequest {
         pokemonService.fetchPokemonList(limit, offset).results.map { it.transform() }
     }
 
