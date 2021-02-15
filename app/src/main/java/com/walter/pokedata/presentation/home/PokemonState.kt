@@ -1,4 +1,4 @@
-package com.walter.pokedata.presentation.main
+package com.walter.pokedata.presentation.home
 
 import com.walter.pokedata.domain.Pokemon
 

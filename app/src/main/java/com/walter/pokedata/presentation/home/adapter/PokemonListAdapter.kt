@@ -1,16 +1,11 @@
-package com.walter.pokedata.presentation.main.adapter
+package com.walter.pokedata.presentation.home.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
-import com.walter.pokedata.R
 import com.walter.pokedata.databinding.PokemonListItemLayoutBinding
 import com.walter.pokedata.domain.Pokemon
 import com.walter.pokedata.util.CustomBindViewHolder
