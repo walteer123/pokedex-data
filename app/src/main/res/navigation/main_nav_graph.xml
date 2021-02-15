@@ -7,5 +7,14 @@
     <fragment
         android:id="@+id/home_fragment"
         android:name="com.walter.pokedata.presentation.home.HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home_fragment_to_details_fragment"
+            app:destination="@id/details_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/details_fragment"
+        android:name="com.walter.pokedata.presentation.details.PokemonDetailsFragment"
+        tools:layout="@layout/fragment_pokemon_details" />
 </navigation>
