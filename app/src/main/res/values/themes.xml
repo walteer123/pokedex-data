@@ -13,5 +13,8 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
+        <item name="fontFamily">@font/open_sans_font_family</item>
+        <item name="android:fontFamily">@font/open_sans_font_family</item>
+        <item name="android:textColor">@color/black_variant</item>
     </style>
 </resources>
