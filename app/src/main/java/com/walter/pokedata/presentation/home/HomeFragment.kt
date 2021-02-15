@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.walter.pokedata.databinding.FragmentHomeBinding
 import com.walter.pokedata.presentation.home.adapter.PokemonListAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,7 +18,9 @@ import kotlinx.coroutines.launch
 class HomeFragment : Fragment() {
 
     val viewModel: HomeViewModel by viewModels()
-    val pokemonAdapter by lazy { PokemonListAdapter() }
+    val pokemonAdapter by lazy {
+        PokemonListAdapter { findNavController().navigate(HomeFragmentDirections.navToDetails()) }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

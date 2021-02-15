@@ -9,7 +9,7 @@
         android:name="com.walter.pokedata.presentation.home.HomeFragment"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_home_fragment_to_details_fragment"
+            android:id="@+id/nav_to_details"
             app:destination="@id/details_fragment" />
     </fragment>
 
