@@ -8,8 +8,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
         android:layout_marginVertical="8dp"
-        app:cardCornerRadius="12dp"
-        android:elevation="4dp">
+        android:elevation="4dp"
+        app:cardCornerRadius="12dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/pokemon_tem_container"
@@ -37,6 +37,18 @@
                 app:layout_constraintStart_toEndOf="@id/pokemon_item_image"
                 app:layout_constraintTop_toTopOf="@id/pokemon_item_image"
                 tools:text="Pikachu" />
+
+            <ToggleButton
+                android:id="@+id/pokemon_favorite"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/fav_pokemon_custom_toggle"
+                android:textOff=""
+                android:textOn=""
+                app:layout_constraintBottom_toBottomOf="@id/pokemon_item_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/pokemon_item_name" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

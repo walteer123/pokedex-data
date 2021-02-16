@@ -24,5 +24,4 @@ class HomeViewModel
         pokemonPagingSource
     }.flow.cachedIn(viewModelScope)
 
-
 }
