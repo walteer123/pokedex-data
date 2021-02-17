@@ -1,17 +1,22 @@
 package com.walter.pokedata.presentation.home
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import com.walter.pokedata.databinding.FragmentHomeBinding
 import com.walter.pokedata.presentation.home.adapter.PokemonListAdapter
+import com.walter.pokedata.presentation.home.adapter.PokemonLoadStateAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -19,7 +24,9 @@ class HomeFragment : Fragment() {
 
     val viewModel: HomeViewModel by viewModels()
     val pokemonAdapter by lazy {
-        PokemonListAdapter { findNavController().navigate(HomeFragmentDirections.navToDetails()) }
+        PokemonListAdapter {
+            findNavController().navigate(HomeFragmentDirections.navToDetails())
+        }
     }
 
     override fun onCreateView(
@@ -30,7 +37,24 @@ class HomeFragment : Fragment() {
         val binding = FragmentHomeBinding.inflate(inflater, container,false)
         setRecycler(binding)
         observeListData()
+        binding.homeMotionLayout.setTransitionListener(object: MotionLayout.TransitionListener {
+            override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
+            }
 
+            override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
+
+            }
+
+            override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
+                //viewModel.interact(HomeFragmentInteraction.Refresh)
+                pokemonAdapter.refresh()
+            }
+
+            override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
+
+            }
+
+        })
         return binding.root
     }
 
@@ -42,8 +66,11 @@ class HomeFragment : Fragment() {
 
     private fun observeListData() {
         lifecycleScope.launch {
-            viewModel.data.collectLatest {
-                pokemonAdapter.submitData(it)
+            pokemonAdapter.withLoadStateFooter(
+                footer = PokemonLoadStateAdapter(pokemonAdapter::retry)
+            )
+            viewModel.data.distinctUntilChanged().collectLatest {
+                pokemonAdapter.submitData(lifecycle,it)
             }
         }
     }

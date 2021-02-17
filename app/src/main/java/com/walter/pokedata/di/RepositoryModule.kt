@@ -1,5 +1,7 @@
 package com.walter.pokedata.di
 
+import com.walter.pokedata.data.repository.PokemonPagingSourceProvider
+import com.walter.pokedata.data.repository.PokemonPagingSourceProviderImpl
 import com.walter.pokedata.data.repository.PokemonRepositoryImpl
 import com.walter.pokedata.domain.PokemonRepository
 import com.walter.pokedata.network.SafeRequest
@@ -21,4 +23,9 @@ abstract class RepositoryModule {
     @Binds
     @ViewModelScoped
     abstract fun provideSafeRequest(impl: SafeRequestImpl): SafeRequest
+
+    @Binds
+    @ViewModelScoped
+    abstract fun providePagingSourceProvider(provider: PokemonPagingSourceProviderImpl): PokemonPagingSourceProvider
+
 }

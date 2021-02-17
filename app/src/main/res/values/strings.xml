@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PokeData</string>
+    <string name="retry_message">Tentar novamente</string>
 </resources>

@@ -8,6 +8,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.walter.pokedata.data.repository.PokemonPagingSource
+import com.walter.pokedata.data.repository.PokemonPagingSourceProvider
 import com.walter.pokedata.domain.Pokemon
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -15,13 +16,19 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel
-@Inject constructor(private val pokemonPagingSource: PokemonPagingSource): ViewModel() {
+@Inject constructor(private val pokemonPagingSource: PokemonPagingSourceProvider): ViewModel() {
 
     private val _state = MutableLiveData<PokemonState>()
     val state : MutableLiveData<PokemonState> get() = _state
 
     val data: Flow<PagingData<Pokemon>> = Pager(PagingConfig(pageSize = 20, enablePlaceholders = false)){
-        pokemonPagingSource
+        pokemonPagingSource.instance
     }.flow.cachedIn(viewModelScope)
+
+    fun interact(interaction: HomeFragmentInteraction) {
+        when(interaction) {
+            is HomeFragmentInteraction.Refresh ->{} //pokemonPagingSource.invalidate()
+        }
+    }
 
 }

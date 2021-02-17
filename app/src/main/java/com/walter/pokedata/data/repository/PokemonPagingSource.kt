@@ -37,7 +37,7 @@ class PokemonPagingSource @Inject constructor(
     }
 
     override fun getRefreshKey(state: PagingState<Int, Pokemon>): Int? {
-        TODO("Not yet implemented")
+        return state.anchorPosition
     }
 
     private fun List<Pokemon>.offsetOrNull(offset:Int) : Int? =

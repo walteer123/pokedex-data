@@ -24,7 +24,7 @@
         app:constraintSetStart="@+id/start"
         app:duration="4000">
         <OnSwipe
-            app:touchAnchorId="@+id/home_progress"
+            app:touchAnchorId="@+id/pokemon_recycler"
             app:touchAnchorSide="top"
             app:dragDirection="dragUp"/>
     </Transition>
