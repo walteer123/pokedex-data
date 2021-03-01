@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint android:id="@+id/pull_to_refresh_progress" />
+        <Constraint android:id="@+id/pull_to_refresh_container" />
+        <Constraint android:id="@+id/pull_delimiter" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/view_pull">
+        <Constraint android:id="@id/pull_to_refresh_progress" />
+        <Constraint android:id="@id/pull_to_refresh_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/pull_delimiter" />
+        <Constraint android:id="@+id/pull_delimiter" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/load">
+        <Constraint android:id="@id/pull_to_refresh_progress" />
+        <Constraint android:id="@id/pull_to_refresh_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pull_to_refresh_progress" />
+        <Constraint android:id="@+id/pull_delimiter" />
+    </ConstraintSet>
+
+    <Transition id="@+id/start_to_load"
+        app:constraintSetEnd="@id/load"
+        app:constraintSetStart="@id/view_pull">
+    </Transition>
+
+    <Transition
+        android:id="@+id/pull_down"
+        app:constraintSetEnd="@id/view_pull"
+        app:constraintSetStart="@+id/start">
+        <OnSwipe
+            app:touchAnchorId="@+id/pull_to_refresh_container"
+            app:touchAnchorSide="top"
+            app:dragDirection="dragUp"/>
+    </Transition>
+</MotionScene>

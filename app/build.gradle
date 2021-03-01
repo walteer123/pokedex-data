@@ -99,6 +99,9 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
 
+    def dynamic_animation_version = "1.0.0"
+    implementation "androidx.dynamicanimation:dynamicanimation:$dynamic_animation_version"
+
 
 
 }

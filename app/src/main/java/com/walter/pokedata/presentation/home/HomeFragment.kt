@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import com.walter.pokedata.R
 import com.walter.pokedata.databinding.FragmentHomeBinding
 import com.walter.pokedata.presentation.home.adapter.PokemonListAdapter
 import com.walter.pokedata.presentation.home.adapter.PokemonLoadStateAdapter
@@ -36,22 +37,23 @@ class HomeFragment : Fragment() {
 
         val binding = FragmentHomeBinding.inflate(inflater, container,false)
         setRecycler(binding)
-        observeListData()
-        binding.homeMotionLayout.setTransitionListener(object: MotionLayout.TransitionListener {
+        observeListData(binding)
+        binding.homeMotionLayout.setTransitionListener(object: MotionLayout.TransitionListener{
             override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
+                Log.d("statusss","inicio")
             }
 
             override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
+                Log.d("statusss","change")
 
             }
 
             override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
-                //viewModel.interact(HomeFragmentInteraction.Refresh)
-                pokemonAdapter.refresh()
+                Log.d("statusss","Cabo")
             }
 
             override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
-
+                Log.d("statusss","trigger")
             }
 
         })
@@ -64,7 +66,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun observeListData() {
+    private fun observeListData(binding: FragmentHomeBinding) {
         lifecycleScope.launch {
             pokemonAdapter.withLoadStateFooter(
                 footer = PokemonLoadStateAdapter(pokemonAdapter::retry)

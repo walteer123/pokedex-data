@@ -3,17 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/details_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:text="Charmander"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+ <com.walter.pokedata.widgets.PullToRefreshView
+     android:id="@+id/pr_view_test"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent">
+     <TextView
+         android:id="@+id/textt"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="fodase"
+         app:layout_constraintTop_toTopOf="@id/pr_view_test"
+         app:layout_constraintStart_toStartOf="@id/pr_view_test"/>
+ </com.walter.pokedata.widgets.PullToRefreshView>
 </layout>
