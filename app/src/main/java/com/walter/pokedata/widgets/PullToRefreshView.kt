@@ -24,6 +24,28 @@ class PullToRefreshView @JvmOverloads constructor(private val ctx: Context, priv
         motionLayout = findViewById(R.id.pull_to_refresh_motion)
         motionLayout.setTransition(R.id.pull_down)
         currentTransition = R.id.pull_down
+
+        motionLayout.setTransitionListener(object : MotionLayout.TransitionListener{
+            override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
+
+            }
+
+            override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
+
+            }
+
+            override fun onTransitionCompleted(layout: MotionLayout?, currentState: Int) {
+               if (currentState == layout?.endState && currentTransition == R.id.pull_down){
+
+               }
+            }
+
+            override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
+
+            }
+
+        })
+
     }
 
     override fun addView(child: View, index: Int, params: ViewGroup.LayoutParams) {
@@ -34,12 +56,5 @@ class PullToRefreshView @JvmOverloads constructor(private val ctx: Context, priv
         }
     }
 
-    override fun onAnimationEnd() {
-        super.onAnimationEnd()
-        if(currentTransition == R.id.pull_down) {
-            motionLayout.setTransition(R.id.load)
-            motionLayout.transitionToStart()
-        }
-    }
 
 }

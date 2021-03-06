@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:indeterminate="true"
         android:padding="30dp"
+
         app:indicatorColor="@color/yellow_800_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

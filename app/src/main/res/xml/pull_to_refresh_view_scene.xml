@@ -28,18 +28,24 @@
         <Constraint android:id="@+id/pull_delimiter" />
     </ConstraintSet>
 
-    <Transition id="@+id/start_to_load"
-        app:constraintSetEnd="@id/load"
-        app:constraintSetStart="@id/view_pull">
-    </Transition>
-
     <Transition
         android:id="@+id/pull_down"
-        app:constraintSetEnd="@id/view_pull"
+        app:constraintSetEnd="@id/load"
         app:constraintSetStart="@+id/start">
         <OnSwipe
             app:touchAnchorId="@+id/pull_to_refresh_container"
             app:touchAnchorSide="top"
             app:dragDirection="dragUp"/>
+        <KeyFrameSet>
+           <KeyPosition
+               app:keyPositionType="parentRelative"
+               app:percentY="5"
+               app:framePosition="50"
+               app:motionTarget="@+id/pull_to_refresh_container"/>
+            <KeyTrigger
+                app:framePosition="50"
+                app:onPositiveCross="show"
+                app:motionTarget="@id/pull_to_refresh_progress"/>
+        </KeyFrameSet>
     </Transition>
 </MotionScene>
