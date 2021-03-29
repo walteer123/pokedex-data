@@ -38,25 +38,6 @@ class HomeFragment : Fragment() {
         val binding = FragmentHomeBinding.inflate(inflater, container,false)
         setRecycler(binding)
         observeListData(binding)
-        binding.homeMotionLayout.setTransitionListener(object: MotionLayout.TransitionListener{
-            override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
-                Log.d("statusss","inicio")
-            }
-
-            override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
-                Log.d("statusss","change")
-
-            }
-
-            override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
-                Log.d("statusss","Cabo")
-            }
-
-            override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
-                Log.d("statusss","trigger")
-            }
-
-        })
         return binding.root
     }
 

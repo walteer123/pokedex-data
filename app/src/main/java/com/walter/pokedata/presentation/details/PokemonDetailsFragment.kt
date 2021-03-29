@@ -21,19 +21,6 @@ class PokemonDetailsFragment: Fragment() {
     ): View {
         val binding = FragmentPokemonDetailsBinding.inflate(inflater,container,false)
 
-        /*val animator = SpringAnimation(binding.detailsName, DynamicAnimation.TRANSLATION_Y)
-        val sf = SpringForce().apply {
-            stiffness = SpringForce.STIFFNESS_LOW
-            finalPosition = 1200F
-            dampingRatio = SpringForce.DAMPING_RATIO_HIGH_BOUNCY
-        }
-
-        animator.spring = sf
-        binding.detailsName.setOnClickListener {
-            animator.start()
-        }*/
-
-
         return binding.root
     }
 

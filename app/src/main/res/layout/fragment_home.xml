@@ -3,26 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.motion.widget.MotionLayout
-        android:id="@+id/home_motion_layout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/home_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutDescription="@xml/fragment_home_scene"
         tools:context=".presentation.home.HomeFragment">
-
-        <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:id="@+id/home_progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:visibility="visible"
-            app:indicatorColor="?attr/colorPrimaryVariant"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="16dp"
-            android:paddingBottom="16dp"/>
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/pokemon_recycler"
             android:layout_width="match_parent"
@@ -33,5 +18,5 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/pokemon_list_item_layout" />
 
-    </androidx.constraintlayout.motion.widget.MotionLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

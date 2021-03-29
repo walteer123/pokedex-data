@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Walter/AndroidStudioProjects/PokeData/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/Walter/AndroidStudioProjects/PokeData/app/src/main/res/layout/fragment_pokemon_details.xml" value="0.1" />
+        <entry key="..\:/Users/Walter/AndroidStudioProjects/PokeData/app/src/main/res/layout/pokemon_list_item_layout.xml" value="0.1" />
+        <entry key="..\:/Users/Walter/AndroidStudioProjects/PokeData/app/src/main/res/layout/pokemon_load_state_item.xml" value="0.1" />
         <entry key="..\:/Users/Walter/AndroidStudioProjects/PokeData/app/src/main/res/layout/pull_to_refresh_view.xml" value="0.1" />
       </map>
     </option>
