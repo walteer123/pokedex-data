@@ -40,7 +40,8 @@ class HomeViewModel
 
     fun interact(interaction: HomeFragmentInteraction) {
         when(interaction) {
-            is HomeFragmentInteraction.Refresh ->{ pokemonPagingSource.instance.invalidate() }
+            is HomeFragmentInteraction.Refresh -> pokemonPagingSource.instance.invalidate()
+            is HomeFragmentInteraction.Favorite -> _stateFlow.value = PokemonState.Favorite("Mensagem boba!")
         }
     }
 

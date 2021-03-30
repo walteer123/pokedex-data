@@ -10,7 +10,7 @@ import com.walter.pokedata.databinding.PokemonListItemLayoutBinding
 import com.walter.pokedata.domain.Pokemon
 import com.walter.pokedata.util.CustomBindViewHolder
 
-class PokemonListAdapter(val onItemClick: () -> Unit): PagingDataAdapter<Pokemon, CustomBindViewHolder<Pokemon>>(diffUtil) {
+class PokemonListAdapter(val onItemClick: () -> Unit, val onFavClick: () -> Unit): PagingDataAdapter<Pokemon, CustomBindViewHolder<Pokemon>>(diffUtil) {
 
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<Pokemon>() {
@@ -25,7 +25,7 @@ class PokemonListAdapter(val onItemClick: () -> Unit): PagingDataAdapter<Pokemon
         }
     }
 
-    class PokemonViewHolder(private val binding: PokemonListItemLayoutBinding, val onItemClick: () -> Unit) : CustomBindViewHolder<Pokemon>(binding) {
+    class PokemonViewHolder(private val binding: PokemonListItemLayoutBinding, val onItemClick: () -> Unit, val onFavClick: () -> Unit) : CustomBindViewHolder<Pokemon>(binding) {
         override fun bind(data: Pokemon?) {
             data?.let {
                 binding.pokemonItemImage.load(it.imageUrl){
@@ -36,13 +36,16 @@ class PokemonListAdapter(val onItemClick: () -> Unit): PagingDataAdapter<Pokemon
                 binding.pokemonTemContainer.setOnClickListener {
                     onItemClick.invoke()
                 }
+                binding.pokemonFavorite.setOnClickListener {
+                    onFavClick.invoke()
+                }
             }
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomBindViewHolder<Pokemon> {
-        return PokemonViewHolder(PokemonListItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false),onItemClick)
+        return PokemonViewHolder(PokemonListItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false), onItemClick, onFavClick)
     }
 
     override fun onBindViewHolder(holder: CustomBindViewHolder<Pokemon>, position: Int) {
