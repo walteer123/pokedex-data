@@ -11,5 +11,4 @@ class PokemonRepositoryImpl @Inject constructor(
     override suspend fun fetchPokemonList(limit: Int, offset: Int) = safeRequest {
         pokemonService.fetchPokemonList(limit, offset).results.map { it.transform() }
     }
-
 }

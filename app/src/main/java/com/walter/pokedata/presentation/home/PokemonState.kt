@@ -1,7 +1,8 @@
 package com.walter.pokedata.presentation.home
 
+import androidx.paging.PagingData
 import com.walter.pokedata.domain.Pokemon
 
 sealed class PokemonState {
-    data class Data(val items: List<Pokemon>) : PokemonState()
+    data class Data(val data: PagingData<Pokemon>) : PokemonState()
 }
