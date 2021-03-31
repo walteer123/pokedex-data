@@ -6,6 +6,7 @@ import com.walter.pokedata.domain.Pokemon
 import com.walter.pokedata.domain.PokemonRepository
 import com.walter.pokedata.util.onError
 import com.walter.pokedata.util.onSuccess
+
 import javax.inject.Inject
 
 class PokemonPagingSource @Inject constructor(

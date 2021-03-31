@@ -23,8 +23,8 @@ import javax.inject.Inject
 class HomeViewModel
 @Inject constructor(private val pokemonPagingSource: PokemonPagingSourceProvider): ViewModel() {
 
-    private val _stateFlow = MutableStateFlow<PokemonState>(PokemonState.Data(PagingData.empty()))
-    val stateFlow : StateFlow<PokemonState> get() = _stateFlow
+    private val _state = MutableLiveData<PokemonState>()
+    val state : LiveData<PokemonState> get() = _state
 
     private val data: Flow<PagingData<Pokemon>> = Pager(PagingConfig(pageSize = 20, enablePlaceholders = false)){
         pokemonPagingSource.instance
@@ -33,7 +33,7 @@ class HomeViewModel
     init {
         viewModelScope.launch {
             data.collect {
-                _stateFlow.value = PokemonState.Data(it)
+                _state.value = PokemonState.Data(it)
             }
         }
     }
@@ -41,7 +41,7 @@ class HomeViewModel
     fun interact(interaction: HomeFragmentInteraction) {
         when(interaction) {
             is HomeFragmentInteraction.Refresh -> pokemonPagingSource.instance.invalidate()
-            is HomeFragmentInteraction.Favorite -> _stateFlow.value = PokemonState.Favorite("Mensagem boba!")
+            is HomeFragmentInteraction.Favorite -> _state.value = PokemonState.Favorite("Mensagem boba!")
         }
     }
 

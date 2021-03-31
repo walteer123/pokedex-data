@@ -13,5 +13,4 @@ class SafeRequestImpl @Inject constructor(): SafeRequest {
             Status.Error(throwable.message ?: "Erro!")
         }
     }
-
 }
