@@ -1,4 +1,4 @@
-package com.walter.pokedata.data.entity
+package com.walter.pokedata.data.entity.remote
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

@@ -1,15 +1,11 @@
 package com.walter.pokedata.di
 
 import com.squareup.moshi.Moshi
-import com.walter.pokedata.data.repository.PokemonService
-import com.walter.pokedata.network.SafeRequest
-import com.walter.pokedata.network.SafeRequestImpl
-import dagger.Binds
+import com.walter.pokedata.data.service.PokemonService
+import com.walter.pokedata.presentation.receiver.WifiStateReceiver
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.scopes.ServiceScoped
-import dagger.hilt.android.scopes.ViewModelScoped
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -35,4 +31,7 @@ object NetworkModule {
     @Singleton
     fun providePokemonService(retrofit: Retrofit) = retrofit.create(PokemonService::class.java)
 
+    @Provides
+    @Singleton
+    fun provideWifiStateReceiver() = WifiStateReceiver()
 }

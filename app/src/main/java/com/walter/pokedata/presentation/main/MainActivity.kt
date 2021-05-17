@@ -1,22 +1,39 @@
 package com.walter.pokedata.presentation.main
 
+import android.content.IntentFilter
+import android.net.wifi.WifiManager
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import com.walter.pokedata.R
 import com.walter.pokedata.databinding.ActivityMainBinding
+import com.walter.pokedata.presentation.receiver.WifiStateReceiver
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+import kotlinx.coroutines.flow.collect
 
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    @Inject lateinit var wifiStateReceiver: WifiStateReceiver
+
+    val viewModel: MainViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-
+        registerReceiver(wifiStateReceiver, IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION))
         observeDarkModeToggle(binding)
+        lifecycleScope.launchWhenStarted {
+            wifiStateReceiver.connectionFLow.collect {
+                viewModel.interact(MainInteraction.UpdateConnectionStatus(it))
+            }
+        }
+
     }
 
     private fun observeDarkModeToggle(binding: ActivityMainBinding) {
@@ -27,5 +44,10 @@ class MainActivity : AppCompatActivity() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        unregisterReceiver(wifiStateReceiver)
     }
 }

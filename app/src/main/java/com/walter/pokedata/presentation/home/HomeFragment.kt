@@ -8,19 +8,15 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.Observer
 import androidx.lifecycle.addRepeatingJob
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.PagingData
 import com.walter.pokedata.databinding.FragmentHomeBinding
-import com.walter.pokedata.domain.Pokemon
+import com.walter.pokedata.domain.entity.Pokemon
 import com.walter.pokedata.presentation.home.adapter.PokemonListAdapter
 import com.walter.pokedata.presentation.home.adapter.PokemonLoadStateAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint

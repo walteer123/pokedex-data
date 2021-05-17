@@ -1,7 +1,6 @@
-package com.walter.pokedata.data.repository
+package com.walter.pokedata.data.service
 
-import com.walter.pokedata.data.entity.PokemonListResponse
-import com.walter.pokedata.data.entity.PokemonRemote
+import com.walter.pokedata.data.entity.remote.PokemonListResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

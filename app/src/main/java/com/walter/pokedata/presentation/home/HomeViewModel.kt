@@ -8,13 +8,10 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.walter.pokedata.data.repository.PokemonPagingSource
-import com.walter.pokedata.data.repository.PokemonPagingSourceProvider
-import com.walter.pokedata.domain.Pokemon
+import com.walter.pokedata.data.repository.remote.provider.PokemonPagingSourceProvider
+import com.walter.pokedata.domain.entity.Pokemon
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.walter.pokedata.databinding.PokemonListItemLayoutBinding
-import com.walter.pokedata.domain.Pokemon
+import com.walter.pokedata.domain.entity.Pokemon
 import com.walter.pokedata.util.CustomBindViewHolder
 
 class PokemonListAdapter(val onItemClick: () -> Unit, val onFavClick: () -> Unit): PagingDataAdapter<Pokemon, CustomBindViewHolder<Pokemon>>(diffUtil) {

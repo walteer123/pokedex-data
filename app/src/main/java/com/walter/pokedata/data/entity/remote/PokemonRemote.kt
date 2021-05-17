@@ -1,7 +1,7 @@
-package com.walter.pokedata.data.entity
+package com.walter.pokedata.data.entity.remote
 
 import com.squareup.moshi.Json
-import com.walter.pokedata.domain.Pokemon
+import com.walter.pokedata.domain.entity.Pokemon
 
 data class PokemonRemote(
         @field:Json(name = "name") val name: String,

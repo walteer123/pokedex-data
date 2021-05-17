@@ -1,9 +1,9 @@
-package com.walter.pokedata.data.repository
+package com.walter.pokedata.data.repository.remote.provider
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.walter.pokedata.domain.Pokemon
-import com.walter.pokedata.domain.PokemonRepository
+import com.walter.pokedata.domain.entity.Pokemon
+import com.walter.pokedata.domain.repository.PokemonRepository
 import com.walter.pokedata.util.onError
 import com.walter.pokedata.util.onSuccess
 
