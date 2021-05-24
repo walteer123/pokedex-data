@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ConnectionStatusDao {
     @Query("SELECT * FROM connection_status LIMIT 1")
-    fun getCurrentConnectionStatus(): ConnectionStatusEntity
+    fun getCurrentConnectionStatus(): ConnectionStatusEntity?
 
     @Query("SELECT * FROM connection_status LIMIT 1")
     fun observeConnectionStatusChange(): Flow<ConnectionStatusEntity>

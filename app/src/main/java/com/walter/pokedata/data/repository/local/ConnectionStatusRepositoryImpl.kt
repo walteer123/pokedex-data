@@ -9,6 +9,9 @@ import com.walter.pokedata.domain.repository.ConnectionStatusRepository
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapLatest
+import kotlinx.coroutines.flow.mapNotNull
+import kotlinx.coroutines.flow.transform
 
 class ConnectionStatusRepositoryImpl @Inject constructor(
     private val connectionDao: ConnectionStatusDao
@@ -17,11 +20,16 @@ class ConnectionStatusRepositoryImpl @Inject constructor(
         connectionDao.upsert(ConnectionStatusEntity(1, wifiState.value))
 
 
-    override suspend fun getCurrentConnectionStatus() =
-        connectionDao.getCurrentConnectionStatus().transform().wifiState
+    override suspend fun getCurrentConnectionStatus(): WifiState {
+        val entity = connectionDao.getCurrentConnectionStatus()
+        val teste = entity?.transform()?.wifiState ?: WifiState.CONNECTED
+        return teste
+    }
 
 
     override fun observeConnectionStatus(): Flow<ConnectionStatus> =
-        connectionDao.observeConnectionStatusChange().map { it.transform() }
+        connectionDao.observeConnectionStatusChange().mapLatest {
+            it?.transform()
+        }
 
 }
