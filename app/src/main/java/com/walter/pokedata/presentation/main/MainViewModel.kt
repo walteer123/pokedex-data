@@ -9,6 +9,7 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @HiltViewModel
@@ -20,7 +21,7 @@ constructor(private val useCase: ConnectionStatusUseCase) : ViewModel() {
 
     init {
         viewModelScope.launch {
-            useCase.getConnectionStatus().collect {
+            useCase.getConnectionStatus().collectLatest {
                 _state.value = when (it.wifiState) {
                     WifiState.CONNECTED -> MainState.ConnectionData("Net conectada")
                     WifiState.DISCONNECTED -> MainState.ConnectionData("Caiu a net")

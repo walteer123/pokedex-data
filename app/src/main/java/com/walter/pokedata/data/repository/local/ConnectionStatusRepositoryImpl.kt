@@ -31,5 +31,4 @@ class ConnectionStatusRepositoryImpl @Inject constructor(
         connectionDao.observeConnectionStatusChange().mapLatest {
             it?.transform()
         }
-
 }

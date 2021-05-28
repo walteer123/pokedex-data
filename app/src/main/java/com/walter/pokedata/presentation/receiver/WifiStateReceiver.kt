@@ -10,7 +10,6 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-@AndroidEntryPoint
 class WifiStateReceiver @Inject constructor() : BroadcastReceiver() {
 
     val connectionFLow : StateFlow<WifiState> get() = _connectionFlow
