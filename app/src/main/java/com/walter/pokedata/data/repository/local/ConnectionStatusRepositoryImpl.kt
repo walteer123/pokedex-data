@@ -19,13 +19,8 @@ class ConnectionStatusRepositoryImpl @Inject constructor(
     override suspend fun updateWifiState(wifiState: WifiState) =
         connectionDao.upsert(ConnectionStatusEntity(1, wifiState.value))
 
-
-    override suspend fun getCurrentConnectionStatus(): WifiState {
-        val entity = connectionDao.getCurrentConnectionStatus()
-        val teste = entity?.transform()?.wifiState ?: WifiState.CONNECTED
-        return teste
-    }
-
+    override suspend fun getCurrentConnectionStatus(): WifiState = connectionDao
+        .getCurrentConnectionStatus()?.transform()?.wifiState ?: WifiState.CONNECTED
 
     override fun observeConnectionStatus(): Flow<ConnectionStatus> =
         connectionDao.observeConnectionStatusChange().mapLatest {
