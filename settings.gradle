@@ -1,3 +1,6 @@
+import module.*
+
 rootProject.name = "PokeData"
 include ':app'
-include ':login'
+include ":login"
+include ':network'
