@@ -1,4 +1,4 @@
-package com.walter.pokedata.database
+package com.walter.pokedata.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

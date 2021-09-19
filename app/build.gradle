@@ -2,6 +2,7 @@ import version.Hilt
 import version.Retrofit
 import version.Moshi
 import module.Modules
+import version.Room
 
 plugins {
     id 'com.android.application'
@@ -62,7 +63,13 @@ dependencies {
     implementation Hilt.daggerHiltAndroid
     implementation Hilt.common
     implementation Hilt.hiltViewModel
-    
+
+    implementation Retrofit.retrofit
+    implementation Retrofit.converterMoshi
+
+    implementation Moshi.moshi
+    implementation Moshi.kotlin
+
     kapt Hilt.hiltAndroidCompiler
     kapt Hilt.hiltCompiler
 
