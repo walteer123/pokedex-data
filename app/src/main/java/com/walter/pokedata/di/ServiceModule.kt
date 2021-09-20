@@ -1,6 +1,7 @@
 package com.walter.pokedata.di
 
 import com.walter.pokedata.data.service.PokemonService
+import com.walter.pokedata.network.di.NetworkModule
 import com.walter.pokedata.presentation.receiver.WifiStateReceiver
 import dagger.Module
 import dagger.Provides
@@ -11,11 +12,13 @@ import retrofit2.Retrofit
 
 @Module
 @InstallIn(SingletonComponent::class)
-object NetworkModule {
+object ServiceModule {
 
     @Provides
     @Singleton
-    fun providePokemonService(retrofit: Retrofit) = retrofit.create(PokemonService::class.java)
+    fun providePokemonService(
+        retrofit: Retrofit
+    ) = retrofit.create(PokemonService::class.java)
 
     @Provides
     @Singleton
