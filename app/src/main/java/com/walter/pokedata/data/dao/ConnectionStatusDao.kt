@@ -16,7 +16,7 @@ interface ConnectionStatusDao {
     fun getCurrentConnectionStatus(): ConnectionStatusEntity?
 
     @Query("SELECT * FROM connection_status WHERE id = 1")
-    fun observeConnectionStatusChange(): Flow<ConnectionStatusEntity>
+    fun observeConnectionStatusChange(): Flow<ConnectionStatusEntity>?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(entity: ConnectionStatusEntity?)

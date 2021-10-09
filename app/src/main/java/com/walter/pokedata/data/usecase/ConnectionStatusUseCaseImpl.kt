@@ -13,7 +13,7 @@ class ConnectionStatusUseCaseImpl @Inject constructor(
     private val safeRequest: SafeRequest
 ) : ConnectionStatusUseCase {
 
-    override suspend fun getConnectionStatus(): Flow<ConnectionStatus> =
+    override suspend fun getConnectionStatus(): Flow<ConnectionStatus?> =
         repository.observeConnectionStatus()
 
     override suspend fun updateConnectionStatus(wifiState: WifiState) = safeRequest {

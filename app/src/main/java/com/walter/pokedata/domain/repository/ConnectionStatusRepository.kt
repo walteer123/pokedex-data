@@ -10,6 +10,6 @@ interface ConnectionStatusRepository {
 
     suspend fun getCurrentConnectionStatus(): WifiState
 
-    fun observeConnectionStatus(): Flow<ConnectionStatus>
+    fun observeConnectionStatus(): Flow<ConnectionStatus?>
 
 }
