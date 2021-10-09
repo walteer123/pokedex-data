@@ -6,7 +6,7 @@ import com.walter.pokedata.util.Status
 import kotlinx.coroutines.flow.Flow
 
 interface ConnectionStatusUseCase {
-    suspend fun getConnectionStatus(): Flow<ConnectionStatus>
+    suspend fun getConnectionStatus(): Flow<ConnectionStatus?>
 
     suspend fun updateConnectionStatus(wifiState: WifiState): Status<Unit>
 }

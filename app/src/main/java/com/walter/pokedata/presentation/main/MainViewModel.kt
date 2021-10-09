@@ -22,9 +22,11 @@ constructor(private val useCase: ConnectionStatusUseCase) : ViewModel() {
     init {
         viewModelScope.launch {
             useCase.getConnectionStatus().collectLatest {
-                _state.value = when (it.wifiState) {
-                    WifiState.CONNECTED -> MainState.ConnectionData("Net conectada")
-                    WifiState.DISCONNECTED -> MainState.ConnectionData("Caiu a net")
+                it?.let { connection ->
+                    _state.value = when (connection.wifiState) {
+                        WifiState.CONNECTED -> MainState.ConnectionData("Net conectada")
+                        WifiState.DISCONNECTED -> MainState.ConnectionData("Caiu a net")
+                    }
                 }
             }
         }
