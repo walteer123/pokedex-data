@@ -6,32 +6,31 @@ import com.walter.pokedata.domain.entity.Pokemon
 import com.walter.pokedata.domain.repository.PokemonRepository
 import com.walter.pokedata.util.onError
 import com.walter.pokedata.util.onSuccess
-
 import javax.inject.Inject
 
 class PokemonPagingSource @Inject constructor(
     private val repository: PokemonRepository
-): PagingSource<Int, Pokemon>() {
+) : PagingSource<Int, Pokemon>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Pokemon> {
         val offset = params.key ?: 0
         return try {
             lateinit var result: LoadResult<Int, Pokemon>
             repository.fetchPokemonList(params.loadSize, offset)
-                .onSuccess { pokemonList ->
+                .onSuccess { response ->
+                    val items = response.results.map { it.transform() }
                     result = LoadResult.Page(
-                        data = pokemonList,
+                        data = items,
                         prevKey = null,
-                        nextKey = pokemonList.offsetOrNull(offset + params.loadSize)
+                        nextKey = offset + params.loadSize
                     )
-
                 }
                 .onError {
                     result = LoadResult.Error(
                         throwable = Throwable(it)
                     )
                 }
-             result
+            result
         } catch (e: Exception) {
             LoadResult.Error(Throwable(e))
         }
@@ -40,11 +39,4 @@ class PokemonPagingSource @Inject constructor(
     override fun getRefreshKey(state: PagingState<Int, Pokemon>): Int? {
         return state.anchorPosition
     }
-
-    private fun List<Pokemon>.offsetOrNull(offset:Int) : Int? =
-        if (this.isEmpty())
-            null
-        else
-            offset + 1
-
 }

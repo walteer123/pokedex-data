@@ -1,5 +1,6 @@
 package com.walter.pokedata.network
 
+import android.util.Log
 import com.walter.pokedata.util.Status
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -10,6 +11,7 @@ class SafeRequestImpl @Inject constructor(): SafeRequest {
         try {
             Status.Success(lambda.invoke())
         } catch (throwable:Throwable){
+            Log.d("Erro", throwable.message ?: "Erro sem mensagem")
             Status.Error(throwable.message ?: "Erro!")
         }
     }
