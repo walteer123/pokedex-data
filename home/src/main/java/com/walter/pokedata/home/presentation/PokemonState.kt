@@ -1,4 +1,4 @@
-package com.walter.pokedata.presentation.home
+package com.walter.pokedata.home.presentation
 
 import androidx.paging.PagingData
 import com.walter.pokedata.domain.entity.Pokemon

@@ -6,7 +6,7 @@
     app:startDestination="@id/home_fragment">
     <fragment
         android:id="@+id/home_fragment"
-        android:name="com.walter.pokedata.presentation.home.HomeFragment"
+        android:name="com.walter.pokedata.home.presentation.HomeFragment"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/nav_to_details"
