@@ -5,12 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.net.wifi.WifiManager
 import com.walter.pokedata.domain.entity.WifiState
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-class WifiStateReceiver @Inject constructor() : BroadcastReceiver() {
+class WifiStateReceiver : BroadcastReceiver() {
 
     val connectionFLow : StateFlow<WifiState> get() = _connectionFlow
     private val _connectionFlow = MutableStateFlow(WifiState.CONNECTED)

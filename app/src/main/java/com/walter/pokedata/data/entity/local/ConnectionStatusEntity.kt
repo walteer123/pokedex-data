@@ -13,7 +13,9 @@ data class ConnectionStatusEntity(
 ) {
     fun transform() = ConnectionStatus(
         id = id,
-        wifiState = WifiState.values().find { it.value == wifiState ?: "" } ?: WifiState.CONNECTED
+        wifiState = WifiState.values()
+            .find { it.value == wifiState ?: "" }
+            ?: WifiState.CONNECTED
     )
 }
 

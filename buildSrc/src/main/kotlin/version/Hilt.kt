@@ -1,7 +1,7 @@
 package version
 
 object Hilt {
-    private const val daggerHiltVersion = "2.31.2-alpha"
+    private const val daggerHiltVersion = "2.39"
     private const val hiltVersion = "1.0.0"
 
     const val daggerHiltAndroid = "com.google.dagger:hilt-android:$daggerHiltVersion"

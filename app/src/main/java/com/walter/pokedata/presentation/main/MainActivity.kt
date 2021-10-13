@@ -15,7 +15,6 @@ import com.walter.pokedata.presentation.receiver.WifiStateReceiver
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
