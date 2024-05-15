@@ -1,24 +1,23 @@
-import version.Hilt
-import version.Retrofit
-import version.Moshi
 import module.Modules
-import version.Room
+import version.Koin
+import version.Moshi
+import version.Retrofit
 
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
     id 'androidx.navigation.safeargs'
 }
 
 android {
-    compileSdkVersion 30
+
 
     defaultConfig {
         applicationId "com.walter.pokedata"
+        compileSdk 34
         minSdkVersion 23
-        targetSdkVersion 30
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
 
@@ -41,41 +40,36 @@ android {
     buildFeatures {
         dataBinding true
     }
+    namespace 'com.walter.pokedata'
 }
 
 dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
-    implementation 'androidx.fragment:fragment-ktx:1.3.3'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3'
+    implementation 'androidx.fragment:fragment-ktx:1.7.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.3.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation "com.squareup.okhttp3:okhttp:4.9.0"
+    implementation 'androidx.core:core-ktx:1.13.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation "com.squareup.okhttp3:okhttp:4.12.0"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     implementation project(Modules.network)
     implementation project(Modules.home)
 
-    implementation Hilt.daggerHiltAndroid
-    implementation Hilt.common
-    implementation Hilt.hiltViewModel
+    implementation Koin.core
+    implementation Koin.android
+    //implementation Koin.bom
 
     implementation Retrofit.retrofit
     implementation Retrofit.converterMoshi
 
     implementation Moshi.moshi
     implementation Moshi.kotlin
-
-    kapt Hilt.hiltAndroidCompiler
-    kapt Hilt.hiltCompiler
-
-    androidTestImplementation Hilt.Test.androidTesting
-    kaptAndroidTest Hilt.Test.daggerHiltCompiler
 
     //lifecycle
     def lifecycle_version = "2.3.1"
@@ -108,7 +102,7 @@ dependencies {
     androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
 
     //room
-    def room_version = "2.3.0"
+    def room_version = "2.6.1"
 
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"

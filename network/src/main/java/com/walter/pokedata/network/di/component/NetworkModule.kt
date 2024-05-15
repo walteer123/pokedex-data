@@ -1,21 +1,22 @@
 package com.walter.pokedata.network.di.component
 
-import com.walter.pokedata.network.data.DefaultServiceFactory
-import com.walter.pokedata.network.data.NetworkServiceFactory
-import dagger.Binds
-import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Qualifier
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import okhttp3.OkHttpClient
+import org.koin.dsl.module
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 
-@Module
-@InstallIn(SingletonComponent::class)
-abstract class NetworkModule {
-
-    @Binds
-    @DefaultRetrofit
-    abstract fun provideDefaultNetworkServiceFactory(factory: DefaultServiceFactory): NetworkServiceFactory
+val networkModule = module {
+    single { OkHttpClient.Builder().build() }
+    single {
+        Moshi.Builder()
+            .addLast(KotlinJsonAdapterFactory())
+            .build()
+    }
+    single { Retrofit.Builder()
+        .client(get<OkHttpClient>())
+        .baseUrl("https://pokeapi.co/api/v2/")
+        .addConverterFactory(MoshiConverterFactory.create(get<Moshi>()))
+        .build() }
 }
-
-@Qualifier
-annotation class DefaultRetrofit

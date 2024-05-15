@@ -10,15 +10,10 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.walter.pokedata.home.domain.entity.Pokemon
 import com.walter.pokedata.home.domain.repository.PokemonPagingSourceProvider
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-@HiltViewModel
-class HomeViewModel
-@Inject constructor(private val pokemonPagingSource: PokemonPagingSourceProvider): ViewModel() {
+class HomeViewModel(private val pokemonPagingSource: PokemonPagingSourceProvider): ViewModel() {
 
     private val _state = MutableLiveData<PokemonState>()
     val state : LiveData<PokemonState> get() = _state

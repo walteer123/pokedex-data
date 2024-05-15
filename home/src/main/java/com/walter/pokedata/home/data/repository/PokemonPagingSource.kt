@@ -3,9 +3,8 @@ package com.walter.pokedata.home.data.repository
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.walter.pokedata.home.data.service.PokemonService
-import javax.inject.Inject
 
-class PokemonPagingSource @Inject constructor(
+class PokemonPagingSource(
     private val pokemonService: PokemonService
 ) : PagingSource<Int, com.walter.pokedata.home.domain.entity.Pokemon>() {
 

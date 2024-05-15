@@ -1,14 +1,11 @@
 package com.walter.pokedata.home.presentation
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.addRepeatingJob
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.PagingData
@@ -17,13 +14,12 @@ import com.walter.pokedata.home.databinding.FragmentHomeBinding
 import com.walter.pokedata.home.domain.entity.Pokemon
 import com.walter.pokedata.home.presentation.adapter.PokemonListAdapter
 import com.walter.pokedata.home.presentation.adapter.PokemonLoadStateAdapter
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-    val viewModel: HomeViewModel by viewModels()
+    val viewModel: HomeViewModel by viewModel()
     val pokemonAdapter by lazy {
         PokemonListAdapter(
             onItemClick = { findNavController().navigate(R.id.nav_to_details) },
@@ -75,7 +71,7 @@ class HomeFragment : Fragment() {
 
 
     private fun updateItems(data: PagingData<Pokemon>) {
-        viewLifecycleOwner.addRepeatingJob(Lifecycle.State.STARTED) {
+        lifecycleScope.launch {
             pokemonAdapter.submitData(data)
         }
     }
