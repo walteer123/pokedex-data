@@ -15,10 +15,13 @@ import com.walter.pokedata.presentation.theme.pokeDexSwitchColors
 
 @Composable
 fun MainScreen(
+    darkTheme: Boolean = false,
     topAppBar:@Composable (() -> Unit)? = null,
     content:@Composable (() -> Unit)? = null,
 ) {
-    PokeDataAppTheme {
+    PokeDataAppTheme(
+        darkTheme = darkTheme
+    ) {
         Surface {
             Column {
                 topAppBar?.invoke()

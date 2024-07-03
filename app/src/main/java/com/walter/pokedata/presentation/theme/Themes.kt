@@ -57,9 +57,9 @@ fun PokeDataAppTheme(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun pokeDexAppBarColors() = TopAppBarColors(
-    containerColor = if (isSystemInDarkTheme()) black else red_400,
-    scrolledContainerColor = if (isSystemInDarkTheme()) black else red_400,
+fun pokeDexAppBarColors(darkTheme: Boolean = false) = TopAppBarColors(
+    containerColor = if (darkTheme) black_primary else red_400,
+    scrolledContainerColor = if (darkTheme) black_primary else red_400,
     navigationIconContentColor = Color.White,
     titleContentColor = Color.White,
     actionIconContentColor = Color.White
