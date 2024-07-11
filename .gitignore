@@ -1,5 +1,5 @@
 *.iml
-.gradle
+*/.gradle
 /local.properties
 /.idea/*
 .DS_Store
@@ -10,3 +10,4 @@
 local.properties
 /.idea
 /.github
+*/build
