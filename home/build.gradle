@@ -2,6 +2,7 @@ import module.Modules
 import version.Moshi
 import version.Retrofit
 import version.Koin
+import version.Compose
 
 plugins {
     id 'com.android.library'
@@ -64,6 +65,7 @@ dependencies {
 
     implementation Koin.core
     implementation Koin.android
+    implementation Koin.compose
     //implementation Koin.bom
 
     //lifecycle
@@ -83,11 +85,13 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:$recycler_version"
 
     //coil
-    implementation "io.coil-kt:coil:1.1.1"
+    implementation "io.coil-kt:coil:2.6.0"
+    implementation "io.coil-kt:coil-compose:2.6.0"
 
     //paging
     def paging_version = "3.2.1"
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+    implementation "androidx.paging:paging-compose:$paging_version"
 
     //navigation
     def nav_version = "2.7.7"
@@ -118,6 +122,7 @@ dependencies {
     // Optional - Integration with ViewModels
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1'
     implementation 'androidx.compose.material3:material3'
+    implementation Compose.composeLiveData
 
     def nav_version_compose = "2.7.7"
     implementation "androidx.navigation:navigation-compose:$nav_version_compose"
