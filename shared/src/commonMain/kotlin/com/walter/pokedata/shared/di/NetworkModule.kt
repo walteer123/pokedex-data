@@ -5,5 +5,5 @@ import com.walter.pokedata.shared.network.factory.NetworkServiceFactory
 import org.koin.dsl.module
 
 val networkModule = module {
-    single <NetworkServiceFactory>{  DefaultServiceFactory() }
+    single <NetworkServiceFactory>{ DefaultServiceFactory() }
 }

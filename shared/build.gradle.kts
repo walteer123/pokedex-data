@@ -7,6 +7,7 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     kotlin("plugin.serialization") version "2.0.0"
+    id("co.touchlab.skie") version "0.8.2"
 }
 
 kotlin {
