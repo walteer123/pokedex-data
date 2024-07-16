@@ -6,11 +6,13 @@
 //
 
 import Foundation
+import shared
 
 @Observable
 class HomeViewModel {
     
     let repository: PokemonRepository
+    var pokemonResponse: [PokemonRemote] = []
     
     init() {
         self.repository = PokemonRepository() 
@@ -18,7 +20,7 @@ class HomeViewModel {
     
     @MainActor
     func getPokemons() async {
-        var pokemonResponse = await repository.fetchPokemonData()
-        print(pokemonResponse)
+        let data: PokemonListResponse? = await repository.fetchPokemonData(defOffset: pokemonResponse.count) ?? nil
+        pokemonResponse += data?.results ?? []
     }
 }

@@ -9,8 +9,8 @@ class PokemonRepository {
     }
     
     @MainActor
-    func fetchPokemonData() async -> PokemonListResponse? {
-      if let data = try? await service.fetchPokemonList(limit:20,offset: 0) { return data }
+    func fetchPokemonData(defOffset: Int = 0) async -> PokemonListResponse? {
+        if let data = try? await service.fetchPokemonList(limit: 60,offset: Int32(defOffset)) { return data }
         return nil
     }
 }

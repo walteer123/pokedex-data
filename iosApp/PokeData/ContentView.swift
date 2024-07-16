@@ -11,11 +11,20 @@ struct ContentView: View {
     var viewModel = HomeViewModel()
     
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        
+        ScrollView {
+            LazyVStack(alignment: .leading) {
+                ForEach(viewModel.pokemonResponse.indices, id: \.self) { index in
+                    let item = viewModel.pokemonResponse[index]
+                   
+                    Text(item.name).task {
+                        if index == viewModel.pokemonResponse.count - 1 {
+                            await viewModel.getPokemons()
+                        }
+                    }
+                    
+                }
+            }
         }
         .padding()
         .task {
