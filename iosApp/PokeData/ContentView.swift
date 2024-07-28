@@ -16,13 +16,13 @@ struct ContentView: View {
             LazyVStack(alignment: .leading) {
                 ForEach(viewModel.pokemonResponse.indices, id: \.self) { index in
                     let item = viewModel.pokemonResponse[index]
-                   
-                    Text(item.name).task {
-                        if index == viewModel.pokemonResponse.count - 1 {
-                            await viewModel.getPokemons()
-                        }
-                    }
                     
+                    PokemonItemView(pokemon: item)
+                        .task {
+                            if index == viewModel.pokemonResponse.count - 1 {
+                                await viewModel.getPokemons()
+                            }
+                        }
                 }
             }
         }

@@ -6,5 +6,5 @@ import com.walter.pokedata.shared.data.extensions.getImageUrl
 
 fun PokemonRemote.transform() = Pokemon(
     name = name,
-    imageUrl = getImageUrl()
+    imageUrl = getImageUrl(this)
 )

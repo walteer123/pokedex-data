@@ -12,7 +12,7 @@ import shared
 class HomeViewModel {
     
     let repository: PokemonRepository
-    var pokemonResponse: [PokemonRemote] = []
+    var pokemonResponse: [Pokemon] = []
     
     init() {
         self.repository = PokemonRepository() 
@@ -20,7 +20,7 @@ class HomeViewModel {
     
     @MainActor
     func getPokemons() async {
-        let data: PokemonListResponse? = await repository.fetchPokemonData(defOffset: pokemonResponse.count) ?? nil
-        pokemonResponse += data?.results ?? []
+        let data: [Pokemon]? = await repository.fetchPokemonData(defOffset: pokemonResponse.count) ?? nil
+        pokemonResponse += data ?? []
     }
 }
