@@ -8,6 +8,7 @@ plugins {
     id("com.android.library")
     kotlin("plugin.serialization") version "2.0.0"
     id("co.touchlab.skie") version "0.8.2"
+    id("app.cash.sqldelight") version "2.0.2"
 }
 
 kotlin {
@@ -42,6 +43,7 @@ kotlin {
             implementation(Kotlin.kotlinxCoroutinesCore)
             implementation(kotlin("reflect"))
             implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+            implementation("app.cash.sqldelight:coroutines-extensions:2.0.2")
         }
         commonTest.dependencies {
             implementation(kotlin("test"))
@@ -49,9 +51,22 @@ kotlin {
         androidMain.dependencies {
             implementation(Ktor.okHttp)
             implementation(Kotlin.kotlinxCoroutinesAndroid)
+            implementation("app.cash.sqldelight:android-driver:2.0.2")
         }
         iosMain.dependencies {
             implementation(Ktor.darwin)
+            implementation("app.cash.sqldelight:native-driver:2.0.2")
+        }
+        nativeMain.dependencies {
+            implementation("app.cash.sqldelight:native-driver:2.0.2")
+        }
+    }
+
+    sqldelight {
+        databases {
+            create("PokemonDatabase") {
+                packageName.set("com.walter.pokedata.sql")
+            }
         }
     }
 }
