@@ -9,3 +9,9 @@ actual class DriverFactory {
         return NativeSqliteDriver(PokemonDatabase.Schema, "pokemon.db")
     }
 }
+
+actual class DatabaseServiceFactoryImpl(private val driverFactory: DriverFactory) : DatabaseServiceFactory {
+    actual override fun create(): PokemonDatabase {
+        return PokemonDatabase(driverFactory.createDriver())
+    }
+}

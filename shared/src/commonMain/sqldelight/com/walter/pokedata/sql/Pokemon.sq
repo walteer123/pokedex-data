@@ -1,7 +1,15 @@
-CREATE TABLE Pokemon (
-  id INTEGER PRIMARY KEY NOT NULL,
+import kotlin.Boolean;
+
+CREATE TABLE PokemonEntity (
   name TEXT NOT NULL,
   imageUrl TEXT NOT NULL,
-  isFavorite INTEGER NOT NULL,
+  isFavorite INTEGER DEFAULT 0,
   url TEXT NOT NULL
 );
+
+selectAll:
+SELECT * FROM PokemonEntity;
+
+insertPokemonObject:
+INSERT INTO PokemonEntity(name, imageUrl, isFavorite, url)
+VALUES ?;

@@ -1,20 +1,14 @@
 package com.walter.pokedata.di
 
-import androidx.room.Room
-import com.walter.pokedata.data.dao.ConnectionStatusDao
-import com.walter.pokedata.data.database.PokeDatabase
+import com.walter.pokedata.shared.factory.DatabaseServiceFactory
+import com.walter.pokedata.shared.factory.DatabaseServiceFactoryImpl
+import com.walter.pokedata.shared.factory.DriverFactory
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 
 val databaseModule = module {
-    single {
-        Room.databaseBuilder(
-            androidContext(),
-            PokeDatabase::class.java,
-            "poke_database"
-        ).build()
-    }
+    single { DriverFactory(context = androidContext()) }
+    single<DatabaseServiceFactory> { DatabaseServiceFactoryImpl(driverFactory = get())  }
 
-    single<ConnectionStatusDao> { get<PokeDatabase>().connectionStatusDao() }
 }
