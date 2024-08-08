@@ -11,5 +11,5 @@ val homeModule get()  = listOf(
 )
 private val dataModule = module {
     single<PokemonPagingSourceProvider> { PokemonPagingSourceProviderImpl(service = get())  }
-    viewModel{ HomeViewModel(pokemonPagingSource = get()) }
+    viewModel{ HomeViewModel(pokemonPagingSource = get(), repository = get()) }
 }

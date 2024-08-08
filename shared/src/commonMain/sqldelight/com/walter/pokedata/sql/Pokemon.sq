@@ -1,5 +1,3 @@
-import kotlin.Boolean;
-
 CREATE TABLE PokemonEntity (
   name TEXT NOT NULL,
   imageUrl TEXT NOT NULL,

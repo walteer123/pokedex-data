@@ -8,5 +8,4 @@ import org.koin.core.component.inject
 object KoinDependencies: KoinComponent {
     
     val pokemonService by inject<PokemonService>()
-      
 }
