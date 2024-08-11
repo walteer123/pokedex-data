@@ -1,19 +1,34 @@
 package com.walter.pokedata.shared.data.repository
 
 import com.walter.pokedata.shared.data.datasource.local.PokemonLocalDataSource
+import com.walter.pokedata.shared.data.datasource.local.SyncDataLocalDataSource
 import com.walter.pokedata.shared.data.datasource.remote.PokemonRemoteDataSource
 import com.walter.pokedata.shared.data.entity.toLocalEntity
 
+private const val LIMIT = 50
 class PokemonRepository(
     private val localDataSource: PokemonLocalDataSource,
+    private val syncDataLocalDataSource: SyncDataLocalDataSource,
     private val remoteDataSource: PokemonRemoteDataSource
 ) {
     suspend fun getPokemons() {
-        var localResponse = localDataSource.getPokemons()
+        val localResponse = localDataSource.getPokemons()
+
         if (localResponse.isEmpty()) {
-           val items = remoteDataSource.getPokemons()
-           localDataSource.insertPokemons(items.map { it.toLocalEntity() })
-           localResponse = localDataSource.getPokemons()
+            val response = remoteDataSource.getPokemonResponse()
+            syncDataLocalDataSource.insertMaxCount(response.count.toLong())
         }
+
+       if (localResponse.size.toLong() <= syncDataLocalDataSource.getSycDataMaxCount()) {
+           val response = remoteDataSource.getPokemonResponse(
+               limit = LIMIT,
+               offset = localResponse.size
+           )
+           if (response.nextPage != null) {
+               localDataSource.insertPokemons(response.results.map { it.toLocalEntity() })
+           }
+       }
+
+       localResponse //o local eh sempre a fonte da verdade
     }
 }

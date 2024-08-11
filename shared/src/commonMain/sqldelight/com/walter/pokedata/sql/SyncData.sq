@@ -1,0 +1,10 @@
+CREATE TABLE SyncDataEntity (
+   maxCount INTEGER DEFAULT 0
+);
+
+selectMaxCount:
+SELECT maxCount FROM SyncDataEntity;
+
+insertMaxCount:
+INSERT INTO SyncDataEntity(maxCount)
+VALUES ?;
