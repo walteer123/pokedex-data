@@ -8,9 +8,9 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.walter.pokedata.home.domain.entity.Pokemon
 import com.walter.pokedata.home.domain.repository.PokemonPagingSourceProvider
 import com.walter.pokedata.shared.data.repository.PokemonRepository
+import com.walter.pokedata.shared.domain.entity.Pokemon
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
@@ -25,13 +25,6 @@ class HomeViewModel(
     val data: Flow<PagingData<Pokemon>> = Pager(PagingConfig(pageSize = 20, enablePlaceholders = false)){
         pokemonPagingSource.instance
     }.flow.cachedIn(viewModelScope)
-
-    init {
-        viewModelScope.launch {
-            val response = repository.getPokemons()
-        }
-
-    }
 
     fun interact(interaction: HomeInteraction) {
         when(interaction) {

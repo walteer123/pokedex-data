@@ -4,6 +4,8 @@ import com.walter.pokedata.shared.data.datasource.local.PokemonLocalDataSource
 import com.walter.pokedata.shared.data.datasource.local.SyncDataLocalDataSource
 import com.walter.pokedata.shared.data.datasource.remote.PokemonRemoteDataSource
 import com.walter.pokedata.shared.data.entity.toLocalEntity
+import com.walter.pokedata.shared.data.mappers.transform
+import com.walter.pokedata.shared.domain.entity.Pokemon
 
 private const val LIMIT = 50
 class PokemonRepository(
@@ -11,7 +13,7 @@ class PokemonRepository(
     private val syncDataLocalDataSource: SyncDataLocalDataSource,
     private val remoteDataSource: PokemonRemoteDataSource
 ) {
-    suspend fun getPokemons() {
+    suspend fun getPokemons(): List<Pokemon> {
         val localResponse = localDataSource.getPokemons()
 
         if (localResponse.isEmpty()) {
@@ -28,7 +30,6 @@ class PokemonRepository(
                localDataSource.insertPokemons(response.results.map { it.toLocalEntity() })
            }
        }
-
-       localResponse //o local eh sempre a fonte da verdade
+        return localResponse.map { it.transform() }
     }
 }

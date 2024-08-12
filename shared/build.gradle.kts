@@ -44,6 +44,9 @@ kotlin {
             implementation(kotlin("reflect"))
             implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
             implementation("app.cash.sqldelight:coroutines-extensions:2.0.2")
+            implementation("app.cash.sqldelight:androidx-paging3-extensions:2.0.0")
+            implementation("app.cash.paging:paging-common:3.3.0-alpha02-0.5.1")
+            implementation("app.cash.paging:paging-compose-common:3.3.0-alpha02-0.4.0")
         }
         commonTest.dependencies {
             implementation(kotlin("test"))
@@ -66,6 +69,7 @@ kotlin {
         databases {
             create("PokemonDatabase") {
                 packageName.set("com.walter.pokedata.sql")
+                verifyMigrations = true
             }
         }
     }

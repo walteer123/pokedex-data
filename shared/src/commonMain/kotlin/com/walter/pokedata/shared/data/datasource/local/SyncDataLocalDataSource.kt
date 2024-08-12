@@ -7,7 +7,7 @@ class SyncDataLocalDataSource(private val databaseServiceFactory: DatabaseServic
 
     fun getSycDataMaxCount(): Long = databaseServiceFactory.create()
         .syncDataQueries.selectMaxCount()
-        .executeAsOne().maxCount ?: 0
+        .executeAsOneOrNull()?.maxCount ?: 0
 
     fun insertMaxCount(maxCount: Long) =
         databaseServiceFactory
